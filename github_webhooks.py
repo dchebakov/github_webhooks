@@ -28,7 +28,8 @@ def main():
     if received_sig != computed_sig:
         return abort(404)
 
-    if 'master' not in json.loads(request.data).get('ref'):
+    ref = json.loads(request.data).get('ref')
+    if ref and 'master' not in ref:
         return abort(404)
 
     subprocess.call(command, stdout=subprocess.PIPE, shell=True)

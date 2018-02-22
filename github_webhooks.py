@@ -18,11 +18,7 @@ def sig_blob(body):
 
 @app.route('/', methods=['post'])
 def main():
-    try:
-        received_sig = request.headers.get('x-hub-signature')
-    except KeyError:
-        return abort(404)
-
+    received_sig = request.headers.get('x-hub-signature')
     computed_sig = sig_blob(request.data)
 
     if received_sig != computed_sig:
